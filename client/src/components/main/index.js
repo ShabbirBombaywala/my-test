@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Axios from 'axios';
 import TotalDonation from '../total-donation';
 import DonationList from '../donation-list';
+import ProjectList from '../project-list';
 // import donations from '../../donation-list.json';
 import { BASE_URL } from '../../config';
 
@@ -76,6 +77,9 @@ export default class Main extends Component {
           <Col md={5}>
             <TotalDonation />
           </Col>
+        </Row>
+        <Row>
+          <ProjectList projects={this.state.projects} />
         </Row>
       </Container>
     );
