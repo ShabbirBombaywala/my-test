@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Axios from 'axios';
 import TotalDonation from '../total-donation';
 import DonationList from '../donation-list';
-import donations from '../../donation-list.json';
+// import donations from '../../donation-list.json';
 import { BASE_URL } from '../../config';
 
 export default class Main extends Component {
@@ -57,6 +57,7 @@ export default class Main extends Component {
   handleSelect = () => {};
   render() {
     console.log('projects:', this.state);
+    const { donations } = this.state.user;
     return (
       <Container className="main">
         <Row>

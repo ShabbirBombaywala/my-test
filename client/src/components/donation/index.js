@@ -14,7 +14,6 @@ export default class Donation extends Component {
     const { donation, index, length } = this.props;
     const first = index === 0 ? 'first' : '';
     const last = index === length - 1 ? 'last' : '';
-    console.log('donation: ', donation);
     return (
       <div>
         <Card className={`donation-card ${first} ${last}`}>
@@ -29,8 +28,8 @@ export default class Donation extends Component {
                   />
                 </Col>
                 <Col md={10}>
-                  <h6>{donation.title}</h6>
-                  <p>{donation.type}</p>
+                  <h6>{donation.project.title}</h6>
+                  <p>{donation.project.type}</p>
                 </Col>
               </Row>
               <Row>
@@ -59,7 +58,7 @@ export default class Donation extends Component {
                   </label>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                  <div className="amount">$ {donation.amount}</div>
+                  <div className="amount">$ {donation.raisedAmount}</div>
                 </Col>
               </Row>
             </Container>

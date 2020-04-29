@@ -13,7 +13,7 @@ export default class DonationList extends Component {
           donations.map((donation, index, donations) => {
             return (
               <Donation
-                key={donation.id}
+                key={donation._id}
                 donation={donation}
                 index={index}
                 length={donations.length}

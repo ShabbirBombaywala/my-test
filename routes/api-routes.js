@@ -3,6 +3,8 @@ const projectController = require('../controllers/project');
 const userController = require('../controllers/user');
 
 router.route('/user').get(userController.get);
+router.route('/user').post(userController.create);
+router.route('/user/:userId/donation').post(userController.addDonation);
 
 router.route('/projects').get(projectController.get);
 // .put(budgetController.update);

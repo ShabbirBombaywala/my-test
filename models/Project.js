@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 // Setup schema
 const projectSchema = mongoose.Schema({
   title: {
@@ -28,6 +29,10 @@ const projectSchema = mongoose.Schema({
   raisedDonation: {
     type: String,
     required: true,
+  },
+  donations: {
+    type: Schema.Types.ObjectId,
+    ref: 'Donation',
   },
 });
 

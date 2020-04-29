@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 // Setup schema
-const userSchema = mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -8,9 +9,15 @@ const userSchema = mongoose.Schema({
   goal: {
     type: String,
   },
+  donations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Donation',
+    },
+  ],
 });
 
-const User = (module.exports = mongoose.model('user', userSchema));
-module.exports.get = function (callback, limit) {
-  User.find(callback).limit(limit);
-};
+module.exports = mongoose.model('User', userSchema);
+// module.exports.get = function (callback, limit) {
+//   User.find(callback).limit(limit);
+// };
