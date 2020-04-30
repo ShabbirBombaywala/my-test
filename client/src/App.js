@@ -8,7 +8,6 @@ import './app.scss';
 const App = () => {
   return (
     <div className="app">
-      <Header />
       <Main />
       <Footer />
     </div>

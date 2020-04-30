@@ -4,6 +4,7 @@ import Axios from 'axios';
 import TotalDonation from '../total-donation';
 import DonationList from '../donation-list';
 import ProjectList from '../project-list';
+import Header from '../header';
 // import donations from '../../donation-list.json';
 import { BASE_URL } from '../../config';
 
@@ -60,28 +61,31 @@ export default class Main extends Component {
     console.log('projects:', this.state);
     const { donations } = this.state.user;
     return (
-      <Container className="main">
-        <Row>
-          <Col md={12}>
-            <h1>Donation List</h1>
-          </Col>
-        </Row>
+      <div>
+        <Header count={donations && donations.length} />
+        <Container className="main">
+          <Row>
+            <Col md={12}>
+              <h1>Donation List</h1>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col md={7}>
-            <DonationList
-              donations={donations}
-              handleSelect={this.handleSelect}
-            />
-          </Col>
-          <Col md={5}>
-            <TotalDonation />
-          </Col>
-        </Row>
-        <Row>
-          <ProjectList projects={this.state.projects} />
-        </Row>
-      </Container>
+          <Row>
+            <Col md={7}>
+              <DonationList
+                donations={donations}
+                handleSelect={this.handleSelect}
+              />
+            </Col>
+            <Col md={5}>
+              <TotalDonation />
+            </Col>
+          </Row>
+          <Row>
+            <ProjectList projects={this.state.projects} />
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
