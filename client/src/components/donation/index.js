@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Image, Row, Col, Container } from 'react-bootstrap';
+import { Card, Image, Row, Col, Container, Button } from 'react-bootstrap';
 
 import './donation.scss';
 
@@ -27,9 +27,12 @@ export default class Donation extends Component {
                     style={{ borderRadius: 15 }}
                   />
                 </Col>
-                <Col md={10}>
+                <Col md={8}>
                   <h6>{donation.project.title}</h6>
                   <p>{donation.project.type}</p>
+                </Col>
+                <Col md={2}>
+                  <Button>Delete</Button>
                 </Col>
               </Row>
               <Row>

@@ -8,13 +8,17 @@ export default class ProjectList extends Component {
     return (
       <Container>
         <h1>You may aslo like these projects</h1>
-
         <Row>
           {projects &&
             projects.length > 0 &&
             projects.map((project, index) => {
               return (
-                <Project key={project._id} project={project} index={index} />
+                <Project
+                  key={project._id}
+                  project={project}
+                  index={index}
+                  donate={this.props.donate}
+                />
               );
             })}
         </Row>

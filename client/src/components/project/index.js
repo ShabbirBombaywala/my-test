@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { Card, Image, Row, Col, Container, Button } from 'react-bootstrap';
+import { Card, Image, Row, Col, ProgressBar, Button } from 'react-bootstrap';
 
+import './project.scss';
 export default class Project extends Component {
+  handleClick = () => {
+    const { donate, project } = this.props;
+    donate(project);
+  };
   render() {
     const {
       imgSrc,
@@ -12,6 +17,8 @@ export default class Project extends Component {
       title,
       type,
     } = this.props.project;
+    const progress = (raisedDonation / donationBudget) * 100;
+    console.log(progress);
     return (
       <Fragment>
         <Col md={4}>
@@ -25,7 +32,15 @@ export default class Project extends Component {
               <Card.Text>
                 {`$ ${raisedDonation} raised of $ ${donationBudget}`}
               </Card.Text>
-              <Button variant="success">Donate</Button>
+              <ProgressBar className="project-progress-bar" now={progress} />
+
+              <Button
+                variant="success"
+                className="donate"
+                onClick={this.handleClick}
+              >
+                Donate
+              </Button>
             </Card.Body>
           </Card>
         </Col>

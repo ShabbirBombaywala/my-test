@@ -5,6 +5,7 @@ import TotalDonation from '../total-donation';
 import DonationList from '../donation-list';
 import ProjectList from '../project-list';
 import Header from '../header';
+import { MONTHLY, ONE_TIME, DEFAULT_DONATION } from '../constants';
 // import donations from '../../donation-list.json';
 import { BASE_URL } from '../../config';
 
@@ -57,9 +58,46 @@ export default class Main extends Component {
   }
   calculateDue = () => {};
   handleSelect = () => {};
+
+  donate = async (project) => {
+    const {
+      user: { donations },
+      user,
+    } = this.state;
+
+    try {
+      this.setState({
+        loader: true,
+      });
+      const newDonation = {
+        monthly: MONTHLY,
+        oneTime: ONE_TIME,
+        owner: user._id,
+        project_id: project._id,
+        raisedAmount: DEFAULT_DONATION,
+      };
+      const resp = await Axios.post(
+        `${BASE_URL}/user/${user._id}/donation`,
+        newDonation
+      );
+
+      if (resp && resp.data) {
+        this.fetchUser();
+        this.setState({ loader: false });
+      }
+    } catch (error) {
+      this.setState({
+        loader: false,
+      });
+    }
+  };
   render() {
-    console.log('projects:', this.state);
-    const { donations } = this.state.user;
+    const {
+      user: { donations },
+      projects,
+      user,
+    } = this.state;
+    console.log('user: ', this.state.user);
     return (
       <div>
         <Header count={donations && donations.length} />
@@ -78,11 +116,11 @@ export default class Main extends Component {
               />
             </Col>
             <Col md={5}>
-              <TotalDonation />
+              <TotalDonation donations={donations} user={user} />
             </Col>
           </Row>
           <Row>
-            <ProjectList projects={this.state.projects} />
+            <ProjectList donate={this.donate} projects={projects} />
           </Row>
         </Container>
       </div>

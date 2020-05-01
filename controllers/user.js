@@ -48,7 +48,7 @@ exports.addDonation = async (req, res) => {
       status: 'success',
       donations: saveDonation,
       savedUser,
-      message: 'user created successfully',
+      message: 'Donation added successfully',
     });
   } catch (error) {
     console.log('error: ', error);
@@ -56,5 +56,35 @@ exports.addDonation = async (req, res) => {
       status: 'error',
       message: error,
     });
+  }
+};
+
+exports.deleteDonation = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const donationId = req.params.donationId;
+    const donation = await Donation.deleteOne({ _id: req.params.donationId });
+    const index = user.donations.findIndex(
+      (donation) => donation._id.toString() === donationId.toString()
+    );
+    console.log('index: ', index, user.donations);
+    if (index > -1) {
+      user.donations.splice(index, 1);
+    }
+    console.log('index1111: ', user.donations);
+
+    // const saveDonation = await newDonation.save();
+    // user.donations.push(saveDonation);
+    // const savedUser = await user.save();
+    res.json({
+      status: 'success',
+      message: 'Donation deleted successfully',
+    });
+  } catch (error) {
+    console.log('error: ', error);
+    // res.json({
+    //   status: 'error',
+    //   message: error,
+    // });
   }
 };

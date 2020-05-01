@@ -6,6 +6,18 @@ import './total-donation.scss';
 
 export default class TotalDonation extends Component {
   render() {
+    const { donations, user } = this.props;
+    const raisedAmount = () => {
+      let initialValue = 0;
+      let sum =
+        donations &&
+        donations.reduce(
+          (accumulator, currentValue) =>
+            accumulator + Number(currentValue.raisedAmount),
+          initialValue
+        );
+      return sum;
+    };
     return (
       <div>
         <Card className="total-donation-card">
@@ -13,7 +25,9 @@ export default class TotalDonation extends Component {
             <Row>
               <Col md={4}></Col>
               <Col md={8}>
-                <Card.Title> $ 1400</Card.Title>
+                <Card.Title>
+                  $ {raisedAmount()} {` of ${user.goal}`}
+                </Card.Title>
                 <p> of Zokat will remain</p>
               </Col>
             </Row>
@@ -26,7 +40,7 @@ export default class TotalDonation extends Component {
             </Row>
           </Card.Body>
         </Card>
-        <CartCalculation />
+        <CartCalculation donations={donations} />
       </div>
     );
   }
